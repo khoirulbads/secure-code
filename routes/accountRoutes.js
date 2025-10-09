@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const accountHandler = require("../handler/accountHandler");
+const handler = require("../handlers/accountHandler");
 
-// // Endpoint untuk create account
-router.post("/create", accountHandler.createAccount);
+router.post("/", handler.createAccount);
+router.get("/", handler.getAllAccounts);
+router.get("/:id", handler.getAccountById);
+router.put("/:id", handler.updateAccount);
+router.delete("/:id", handler.deleteAccount);
 
 module.exports = router;
