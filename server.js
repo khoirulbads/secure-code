@@ -1,18 +1,15 @@
 const express = require("express");
+require("dotenv").config();
 const app = express();
-const PORT = process.env.PORT || 8080;
 const accountRoutes = require("./routes/accountRoutes");
 
-// Middleware
 app.use(express.json());
-
-// Route sederhana
+app.use("/api/account", accountRoutes);
 app.get("/", (req, res) => {
   res.send("Hello World!  Express.js is running");
 });
-app.use("/api/account", accountRoutes);
 
-// Jalankan server
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`service running in http://localhost:${PORT}`);
+  console.log(`Server listening on http://localhost:${PORT}`);
 });
