@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const handler = require("../handlers/accountHandler");
+const { verifyToken } = require("../middlewares/authMiddleware");
+
+// Semua route di bawah ini butuh token JWT
+router.use(verifyToken);
 
 router.post("/", handler.createAccount);
 router.get("/", handler.getAllAccounts);

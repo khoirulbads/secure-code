@@ -4,6 +4,7 @@ const { createAccountSchema } = require("../validators/accountValidators");
 
 exports.createAccount = async (req, res) => {
   try {
+    const idAccount = "";
     const { error, value } = createAccountSchema.validate(req.body, {
       abortEarly: false,
     });
@@ -35,11 +36,14 @@ exports.createAccount = async (req, res) => {
       accountType,
       initialBalance,
     ]);
+
     return res.status(201).json({
       status: "SUCCESS",
       message: "Account created successfully",
       data: rows[0],
     });
+
+    res.send("success");
   } catch (err) {
     console.error("createAccount error", err);
     // handle unique violation nicely (Postgres error code 23505)
@@ -51,6 +55,8 @@ exports.createAccount = async (req, res) => {
     return res
       .status(500)
       .json({ status: "ERROR", message: "Internal server error" });
+
+    res.send("failed");
   }
 };
 
